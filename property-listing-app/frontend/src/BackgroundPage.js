@@ -55,7 +55,7 @@ function BackgroundPage() {
     }
     
     // Send to backend
-    axios.post("http://127.0.0.1:5000/api/properties", newProperty)
+    axios.post("https://full-stack-3-9mxl.onrender.com", newProperty)
       .then(response => {
         console.log("Property posted successfully:", response.data);
         setPostStatus("success");
@@ -207,7 +207,7 @@ function BackgroundPage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get("http://127.0.0.1:5000/api/properties")
+    axios.get("https://full-stack-3-9mxl.onrender.com")
       .then((res) => {
         console.log("Data received:", res.data);
         setProperties(res.data);
