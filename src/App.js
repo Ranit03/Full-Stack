@@ -107,7 +107,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get("http://127.0.0.1:5000/api/properties")
+    axios.get("https://full-stack-8-da76.onrender.com/api/properties")
       .then((res) => {
         console.log("Data received:", res.data);
         setProperties(res.data);

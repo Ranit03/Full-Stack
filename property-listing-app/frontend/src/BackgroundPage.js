@@ -58,7 +58,7 @@ function BackgroundPage() {
     }
     
     // Send to backend
-    axios.post("https://full-stack-3-9mxl.onrender.com/api/properties", newProperty)
+    axios.post("https://full-stack-8-da76.onrender.com/api/properties", newProperty)
       .then(response => {
         console.log("Property posted successfully:", response.data);
         setPostStatus("success");
@@ -210,7 +210,7 @@ function BackgroundPage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get("https://full-stack-3-9mxl.onrender.com/api/properties")
+    axios.get("https://full-stack-8-da76.onrender.com/api/properties")
       .then((res) => {
         console.log("Data received:", res.data);
         setProperties(res.data);
@@ -318,7 +318,7 @@ function BackgroundPage() {
       // Clear any previous error messages
       setError(null);
       
-      axios.delete(`https://full-stack-3-9mxl.onrender.com/api/properties/${idToDelete}`)
+      axios.delete(`https://full-stack-8-da76.onrender.com/api/properties/${idToDelete}`)
         .then(response => {
           console.log("Property deleted successfully:", response.data);
           
