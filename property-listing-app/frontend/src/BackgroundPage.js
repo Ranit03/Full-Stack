@@ -207,7 +207,7 @@ function BackgroundPage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get("http://127.0.0.1:5000/api/properties")
+    axios.get("https://full-stack-4-rj6q.onrender.com")
       .then((res) => {
         console.log("Data received:", res.data);
         setProperties(res.data);
