@@ -55,7 +55,7 @@ function BackgroundPage() {
     }
     
     // Send to backend
-    axios.post("http://127.0.0.1:5000/api/properties", newProperty)
+    axios.post("https://full-stack-4-rj6q.onrender.com", newProperty)
       .then(response => {
         console.log("Property posted successfully:", response.data);
         setPostStatus("success");
