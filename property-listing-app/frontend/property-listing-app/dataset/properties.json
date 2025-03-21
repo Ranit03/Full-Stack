@@ -1,0 +1,90 @@
+[
+    {
+        "name": "Cozy Cottage",
+        "price": 150000,
+        "location": "Springfield",
+        "bedrooms": 2,
+        "bathrooms": 1,
+        "image_url": "https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg"
+    },
+    {
+        "name": "Modern Apartment",
+        "price": 250000,
+        "location": "Metropolis",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "image_url": "https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg"
+    },
+    {
+        "name": "Spacious Villa",
+        "price": 500000,
+        "location": "Beachside",
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "image_url": "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg"
+    },
+    {
+        "name": "Urban Loft",
+        "price": 300000,
+        "location": "Downtown",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "image_url": "https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg"
+    },
+    {
+        "name": "Suburban House",
+        "price": 200000,
+        "location": "Suburbia",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "image_url": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
+    },
+    {
+        "name": "Luxury Condo",
+        "price": 450000,
+        "location": "Uptown",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "image_url": "https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg"
+    },
+    {
+        "name": "Rustic Cabin",
+        "price": 120000,
+        "location": "Countryside",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "image_url": "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg"
+    },
+    {
+        "name": "Penthouse Suite",
+        "price": 600000,
+        "location": "City Center",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "image_url": "https://images.pexels.com/photos/358574/pexels-photo-358574.jpeg"
+    },
+    {
+        "name": "Charming Bungalow",
+        "price": 180000,
+        "location": "Old Town",
+        "bedrooms": 2,
+        "bathrooms": 1,
+        "image_url": "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg"
+    },
+    {
+        "name": "Seaside Retreat",
+        "price": 350000,
+        "location": "Coastal",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "image_url": "https://images.pexels.com/photos/221540/pexels-photo-221540.jpeg"
+    },
+    {
+        "name": "Nirvana City",
+        "price": 140000,
+        "location": "Dhanbad",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "image_url": "https://imagecdn.99acres.com/media1/26142/4/522844971M-1728130514783.jpg"
+    }
+]

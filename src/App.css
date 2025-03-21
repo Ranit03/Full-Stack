@@ -1,0 +1,351 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212; /* Changed from #000000 */
+  color: #fff;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+html {
+  background: #121212; /* Changed from #000000 */
+}
+
+/* Improve animated gradient background */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #121212; /* Changed from #000000 */
+  background-size: 400% 400%;
+}
+
+/* Add stars to background */
+.background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 2px);
+  background-size: 100px 100px;
+  opacity: 0.3;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add subtle particle effect */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+#root {
+  background: transparent;
+  min-height: 100vh;
+}
+
+.container {
+  width: 80%;
+  max-width: 700px; /* Reduced from 900px */
+  margin: 20px auto;
+  padding: 5px;
+  background-color: rgba(10, 10, 20, 0.7);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Improve card visibility */
+.card {
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  background-color: rgba(25, 40, 50, 0.8);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(100, 200, 255, 0) inset;
+  transition: box-shadow 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  box-shadow: 0 0 30px rgba(100, 200, 255, 0.2) inset;
+}
+
+.card img {
+  width: 100%;
+  height: 120px; /* Increased from 20px */
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  filter: contrast(1.1) brightness(1.1);
+}
+
+.card-content {
+  padding: 10px; /* Reduced from 15px */
+}
+
+.card-content h2 {
+  margin-top: 0;
+  margin-bottom: 8px; /* Reduced margin */
+  color: #8af;
+  font-size: 1.1rem; /* Reduced from 1.4rem */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-content p {
+  margin: 10px 0;
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filters input {
+  padding: 3px 5px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  min-width: 120px;
+  background-color: rgba(20, 20, 50, 0.6);
+  color: white;
+  font-size: 0.7rem;
+  height: 25px;
+}
+
+.filters input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.filter-tag {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.listings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px; /* Reduced from 15px */
+  margin-top: 10px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.card {
+  flex: 1;
+  max-width: 32%;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px; /* Reduced from 8px */
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: transform 0.1s ease, box-shadow 0.3s ease, background 0.3s ease;
+  background-color: rgba(20, 20, 50, 0.8);
+  backdrop-filter: blur(5px);
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Let height be determined by content */
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(100, 100, 255, 0) inset;
+  transition: box-shadow 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  box-shadow: 0 0 30px rgba(100, 100, 255, 0.3) inset;
+}
+
+.card img {
+  width: 100%;
+  height: 20px; /* Reduced from 40px to half the size */
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Make card even more compact */
+.card {
+  flex: 1;
+  max-width: 32%;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  background-color: rgba(20, 20, 50, 0.7);
+  transform-style: preserve-3d;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.card-content {
+  padding: 2px;
+}
+
+.card-content h2 {
+  margin: 0;
+  font-size: 0.6rem;
+  line-height: 1;
+}
+
+.card-content p {
+  margin: 1px 0;
+  font-size: 0.5rem;
+  line-height: 1;
+}
+
+.card-content p:last-child {
+  padding-bottom: 15px;
+}
+
+.star-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 15px;
+  font-size: 0.8rem;
+}
+
+.pagination button {
+  background-color: rgba(40, 80, 120, 0.8);
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.7rem;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: rgba(60, 100, 140, 0.9);
+}
+
+.pagination button:disabled {
+  background-color: rgba(40, 40, 40, 0.5);
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: white;
+  font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

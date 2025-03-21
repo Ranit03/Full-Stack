@@ -1,0 +1,18 @@
+body, 
+html, 
+#root,
+.background,
+.container,
+.app-wrapper {
+  background-color: #121212 !important;
+  background: #121212 !important;
+  color: #fff !important;
+}
+
+* {
+  background-color: transparent;
+}
+
+.card {
+  background-color: rgba(25, 40, 50, 0.8) !important;
+}
