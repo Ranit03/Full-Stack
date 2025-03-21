@@ -54,5 +54,41 @@ def add_property():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/properties/<int:property_id>', methods=['DELETE'])
+def delete_property(property_id):
+    try:
+        # Load existing properties
+        with open('properties.json', 'r') as f:
+            properties = json.load(f)
+        
+        # Find the property to delete
+        property_index = None
+        for i, prop in enumerate(properties):
+            if prop.get('id') == property_id:
+                property_index = i
+                break
+        
+        # If property found, remove it
+        if property_index is not None:
+            deleted_property = properties.pop(property_index)
+            
+            # Save updated properties list
+            with open('properties.json', 'w') as f:
+                json.dump(properties, f, indent=2)
+            
+            return jsonify({
+                'message': 'Property deleted successfully',
+                'deleted': deleted_property
+            }), 200
+        else:
+            return jsonify({
+                'error': 'Property not found'
+            }), 404
+            
+    except Exception as e:
+        return jsonify({
+            'error': str(e)
+        }), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

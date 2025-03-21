@@ -297,6 +297,22 @@ function BackgroundPage() {
     });
   };
 
+  // Add this function to handle property deletion
+  const handleDeleteProperty = (propertyId) => {
+    if (window.confirm("Are you sure you want to delete this property?")) {
+      axios.delete(`http://127.0.0.1:5000/api/properties/${propertyId}`)
+        .then(response => {
+          console.log("Property deleted successfully:", response.data);
+          // Remove the property from the state
+          setProperties(properties.filter(property => property.id !== propertyId));
+        })
+        .catch(error => {
+          console.error("Error deleting property:", error);
+          setError("Failed to delete property. Please try again.");
+        });
+    }
+  };
+
   return (
     <div className="background-page">
       <canvas ref={canvasRef} className="star-background"></canvas>
@@ -306,77 +322,85 @@ function BackgroundPage() {
         {error && <div className="error-message">{error}</div>}
         
         <div className="action-buttons">
-          <button 
-            className="post-property-button"
-            onClick={() => setShowPropertyForm(!showPropertyForm)}
-          >
-            {showPropertyForm ? "Cancel" : "Post Property"}
-          </button>
+          {/* Wrap the button in a container for centering */}
+          <div className="post-property-container">
+            <button 
+              className="post-property-button"
+              onClick={() => setShowPropertyForm(!showPropertyForm)}
+            >
+              {showPropertyForm ? "Cancel" : "Post New Property"}
+            </button>
+          </div>
         </div>
         
+        {/* Compact Property Form */}
         {showPropertyForm && (
           <div className="property-form-container">
-            <h2>Post New Property</h2>
-            <form onSubmit={handlePropertySubmit} className="property-form">
+            <h2>Post a New Property</h2>
+            <form onSubmit={handlePropertySubmit}>
               <div className="form-group">
-                <label>Property Name*</label>
+                <label htmlFor="name">Name*</label>
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={newProperty.name}
                   onChange={handlePropertyInputChange}
-                  required
+                  placeholder="Property name"
                 />
               </div>
               
               <div className="form-group">
-                <label>Price*</label>
+                <label htmlFor="price">Price (USD)*</label>
                 <input
                   type="number"
+                  id="price"
                   name="price"
                   value={newProperty.price}
                   onChange={handlePropertyInputChange}
-                  required
+                  placeholder="Price"
                 />
               </div>
               
               <div className="form-group">
-                <label>Location*</label>
+                <label htmlFor="location">Location*</label>
                 <input
                   type="text"
+                  id="location"
                   name="location"
                   value={newProperty.location}
                   onChange={handlePropertyInputChange}
-                  required
+                  placeholder="Location"
                 />
               </div>
               
               <div className="form-group">
-                <label>Bedrooms*</label>
+                <label htmlFor="bedrooms">Bedrooms*</label>
                 <input
                   type="number"
+                  id="bedrooms"
                   name="bedrooms"
                   value={newProperty.bedrooms}
                   onChange={handlePropertyInputChange}
-                  required
                 />
               </div>
               
               <div className="form-group">
-                <label>Bathrooms*</label>
+                <label htmlFor="bathrooms">Bathrooms*</label>
                 <input
                   type="number"
+                  id="bathrooms"
                   name="bathrooms"
                   value={newProperty.bathrooms}
                   onChange={handlePropertyInputChange}
-                  required
                 />
               </div>
               
               <div className="form-group">
-                <label>Image URL</label>
+                <label htmlFor="image_url">Image URL</label>
                 <input
                   type="text"
+                  id="image_url"
                   name="image_url"
                   value={newProperty.image_url}
                   onChange={handlePropertyInputChange}
@@ -384,16 +408,15 @@ function BackgroundPage() {
                 />
               </div>
               
-              <button type="submit" className="submit-button">
+              <button type="submit">
                 {postStatus === "posting" ? "Posting..." : "Submit Property"}
               </button>
               
-              {postStatus === "success" && (
-                <div className="success-message">Property posted successfully!</div>
-              )}
-              
-              {postStatus === "error" && (
-                <div className="error-message">Error posting property. Please try again.</div>
+              {postStatus && postStatus !== "posting" && (
+                <div className={`status-message ${postStatus}`}>
+                  {postStatus === "success" && "Property posted successfully!"}
+                  {postStatus === "error" && "Error! Check required fields."}
+                </div>
               )}
             </form>
           </div>
@@ -518,6 +541,13 @@ function BackgroundPage() {
                   {property.description && <p className="description">{property.description}</p>}
                   {property.squareFeet && <p>Area: {property.squareFeet} sq ft</p>}
                   {property.yearBuilt && <p>Year Built: {property.yearBuilt}</p>}
+                  {/* Add the delete button */}
+                  <button 
+                    className="delete-property-button"
+                    onClick={() => handleDeleteProperty(property.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               ))}
             </div>

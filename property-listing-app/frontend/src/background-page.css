@@ -254,6 +254,15 @@ h1 {
   color: #8af;
 }
 
+/* Center the post property button */
+.post-property-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Enhanced animation for the button */
 .post-property-button {
   background: linear-gradient(45deg, #3498db, #2980b9);
   color: white;
@@ -266,7 +275,7 @@ h1 {
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  animation: pulse 2s infinite;
+  animation: float 3s ease-in-out infinite;
 }
 
 .post-property-button:hover {
@@ -294,6 +303,21 @@ h1 {
   left: 100%;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
@@ -306,11 +330,249 @@ h1 {
   }
 }
 
+/* Compact property form styling */
+.property-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: rgba(30, 40, 70, 0.8);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 255, 0.3);
+  text-align: center;
+  animation: formAppear 0.4s ease-out;
+  box-shadow: 0 0 15px rgba(100, 150, 255, 0.2);
+}
 
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.property-form-container h2 {
+  color: #8af;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  animation: fadeIn 0.8s ease-out;
+}
 
+.property-form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.property-form-container .form-group {
+  width: 100%;
+  margin-bottom: 8px;
+  animation: slideIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
 
+.property-form-container .form-group:nth-child(1) { animation-delay: 0.1s; }
+.property-form-container .form-group:nth-child(2) { animation-delay: 0.2s; }
+.property-form-container .form-group:nth-child(3) { animation-delay: 0.3s; }
+.property-form-container .form-group:nth-child(4) { animation-delay: 0.4s; }
+.property-form-container .form-group:nth-child(5) { animation-delay: 0.5s; }
+.property-form-container .form-group:nth-child(6) { animation-delay: 0.6s; }
 
+.property-form-container label {
+  display: block;
+  margin-bottom: 2px;
+  color: #8af;
+  text-align: center;
+  font-size: 0.9rem;
+}
 
+.property-form-container input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(100, 150, 255, 0.3);
+  background-color: rgba(20, 30, 60, 0.7);
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  height: 30px;
+}
 
+.property-form-container button {
+  margin-top: 12px;
+  padding: 6px 15px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  animation: pulse 2s infinite;
+  font-size: 0.9rem;
+  height: 32px;
+}
+
+.property-form-container button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Compact status messages */
+.status-message {
+  margin-top: 8px;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-align: center;
+  animation: fadeIn 0.5s;
+}
+
+.status-message.success {
+  background-color: rgba(40, 167, 69, 0.7);
+  color: white;
+}
+
+.status-message.error {
+  background-color: rgba(220, 53, 69, 0.7);
+  color: white;
+}
+
+.status-message.posting {
+  background-color: rgba(255, 193, 7, 0.7);
+  color: white;
+}
+
+/* Property selector styling */
+.property-selector-button {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  margin-left: 10px;
+}
+
+.property-selector-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.property-selector-container {
+  background-color: rgba(25, 40, 80, 0.7);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(100, 150, 255, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.property-selector-container h2 {
+  color: #8af;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.property-selector-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.property-selector {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(100, 150, 255, 0.3);
+  background-color: rgba(20, 30, 60, 0.6);
+  color: white;
+  font-size: 1rem;
+}
+
+.selector-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-property-button {
+  flex: 1;
+  padding: 8px 15px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.view-property-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.delete-selected-button {
+  flex: 1;
+  padding: 8px 15px;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.delete-selected-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.view-property-button:disabled,
+.delete-selected-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Delete property button styling */
+.delete-property-button {
+  background-color: rgba(255, 70, 70, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 70, 70, 0.4);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.delete-property-button:hover {
+  background-color: rgba(255, 70, 70, 0.4);
+  transform: scale(1.02);
+}
+
+.delete-property-button:active {
+  transform: scale(0.98);
+}
