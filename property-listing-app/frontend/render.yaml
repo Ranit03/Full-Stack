@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: property-listing-frontend
+    env: static
+    buildCommand: chmod +x node_modules/.bin/react-scripts && npm run build
+    publishDirectory: build
+    rootDirectory: frontend
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -31,6 +31,9 @@ function BackgroundPage() {
   });
   const [postStatus, setPostStatus] = useState(null);
 
+  // Add this state to track which property is in delete confirmation mode
+  const [confirmingDelete, setConfirmingDelete] = useState(null);
+
   // Handle new property form input changes
   const handlePropertyInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +58,7 @@ function BackgroundPage() {
     }
     
     // Send to backend
-    axios.post("https://full-stack-3-9mxl.onrender.com", newProperty)
+    axios.post("https://full-stack-3-9mxl.onrender.com/api/properties", newProperty)
       .then(response => {
         console.log("Property posted successfully:", response.data);
         setPostStatus("success");
@@ -207,7 +210,7 @@ function BackgroundPage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios.get("https://full-stack-3-9mxl.onrender.com")
+    axios.get("https://full-stack-3-9mxl.onrender.com/api/properties")
       .then((res) => {
         console.log("Data received:", res.data);
         setProperties(res.data);
@@ -297,19 +300,62 @@ function BackgroundPage() {
     });
   };
 
-  // Add this function to handle property deletion
-  const handleDeleteProperty = (propertyId) => {
-    if (window.confirm("Are you sure you want to delete this property?")) {
-      axios.delete(`http://127.0.0.1:5000/api/properties/${propertyId}`)
+  // Update the delete handler with better error handling
+  const handleDeleteProperty = (propertyId, event) => {
+    // Stop event propagation to prevent any parent handlers from firing
+    event.stopPropagation();
+    
+    // If already confirming this property, proceed with deletion
+    if (confirmingDelete === propertyId) {
+      console.log("Confirming delete for property ID:", propertyId);
+      
+      // Reset confirming state
+      setConfirmingDelete(null);
+      
+      // Ensure propertyId is a number for the API request
+      const idToDelete = parseInt(propertyId, 10);
+      
+      // Clear any previous error messages
+      setError(null);
+      
+      axios.delete(`https://full-stack-3-9mxl.onrender.com/api/properties/${idToDelete}`)
         .then(response => {
           console.log("Property deleted successfully:", response.data);
-          // Remove the property from the state
-          setProperties(properties.filter(property => property.id !== propertyId));
+          
+          // Remove the deleted property from the local state immediately
+          setProperties(prevProperties => 
+            prevProperties.filter(property => parseInt(property.id, 10) !== idToDelete)
+          );
         })
         .catch(error => {
           console.error("Error deleting property:", error);
-          setError("Failed to delete property. Please try again.");
+          
+          // Check if the error is a 404 (not found) - this is actually expected
+          // if the backend successfully deleted the property
+          if (error.response && error.response.status === 404) {
+            console.log("Property not found in backend, removing from frontend");
+            // Still remove from UI even if backend returns 404
+            setProperties(prevProperties => 
+              prevProperties.filter(property => parseInt(property.id, 10) !== idToDelete)
+            );
+          } else {
+            // Only show error for other types of errors
+            setError("Failed to delete property. Please try again.");
+            
+            // Auto-clear error after 3 seconds
+            setTimeout(() => {
+              setError(null);
+            }, 3000);
+          }
         });
+    } else {
+      // First click - set confirming state
+      setConfirmingDelete(propertyId);
+      
+      // Auto-reset after 3 seconds if not confirmed
+      setTimeout(() => {
+        setConfirmingDelete(prev => prev === propertyId ? null : prev);
+      }, 3000);
     }
   };
 
@@ -527,27 +573,26 @@ function BackgroundPage() {
             <h2>Properties Found: {filteredProperties.length}</h2>
             <div className="property-grid">
               {filteredProperties.map((property, index) => (
-                <div key={index} className="property-card">
+                <div key={property.id || index} className="property-card">
                   <h3>{property.name}</h3>
                   <p className="price">${property.price.toLocaleString()}</p>
                   <p><i className="location-icon"></i> {property.location}</p>
                   <div className="property-features">
                     <span>{property.bedrooms} bedrooms, {property.bathrooms} bathrooms</span>
-                    {/* Removed hasGarage icon/span */}
-                    {/* Removed hasPool icon/span */}
-                    {/* Removed property type icon/span */}
                   </div>
                   {property.image_url && <img src={property.image_url} alt={property.name} />}
                   {property.description && <p className="description">{property.description}</p>}
                   {property.squareFeet && <p>Area: {property.squareFeet} sq ft</p>}
                   {property.yearBuilt && <p>Year Built: {property.yearBuilt}</p>}
-                  {/* Add the delete button */}
-                  <button 
-                    className="delete-property-button"
-                    onClick={() => handleDeleteProperty(property.id)}
-                  >
-                    Delete
-                  </button>
+                  {/* Wrap the button in a container div */}
+                  <div className="delete-button-container">
+                    <button 
+                      onClick={(e) => handleDeleteProperty(property.id, e)}
+                      className={`delete-button ${confirmingDelete === property.id ? 'confirming' : ''}`}
+                    >
+                      {confirmingDelete === property.id ? 'Confirm' : 'Delete'}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
